@@ -323,33 +323,45 @@
             text-decoration: none;
         }
 
-        /* ---------- TOOLS TAG STYLES ---------- */
+        /* ---------- TOOLS TAG STYLES (محسّن) ---------- */
         .tools-list {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin: 10px 0 5px;
+            margin: 12px 0 8px;
         }
         .tool-tag {
-            background: rgba(90, 200, 200, 0.15);
-            border: 1px solid rgba(90, 200, 200, 0.3);
-            color: #5AC8C8;
-            font-size: 0.75rem;
-            padding: 4px 12px;
+            background: rgba(90, 200, 200, 0.12);
+            border: 1px solid rgba(90, 200, 200, 0.25);
+            color: #b0f0f0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            padding: 6px 14px;
             border-radius: 30px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-family: 'Fira Code', monospace;
-            transition: all 0.2s;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .tool-tag i {
-            font-size: 0.9rem;
+            font-size: 1rem;
+            color: #5AC8C8;
+            transition: transform 0.2s;
         }
         .tool-tag:hover {
             background: #5AC8C8;
             color: #0B0E11;
             border-color: #5AC8C8;
+            box-shadow: 0 4px 12px rgba(90, 200, 200, 0.3);
+            transform: translateY(-2px);
+        }
+        .tool-tag:hover i {
+            color: #0B0E11;
+            transform: scale(1.1);
         }
 
         /* ---------- SIDEBAR TOC - ICONS ONLY ---------- */
@@ -439,7 +451,7 @@
             .contact-icon { width: 48px; height: 48px; font-size: 1.6rem; }
             .grid-overlay { background-size: 20px 20px; }
             .tools-list { gap: 5px; }
-            .tool-tag { font-size: 0.7rem; padding: 3px 8px; }
+            .tool-tag { font-size: 0.75rem; padding: 4px 10px; }
         }
 
         @media (max-width: 360px) {
@@ -835,7 +847,7 @@
             initParticles();
         });
 
-        // ---------- TOC SIDEBAR SCROLL SPY (تم التعديل هنا) ----------
+        // ---------- TOC SIDEBAR SCROLL SPY (محسّن) ----------
         const sections = [
             { id: 'toolkit', toc: document.querySelector('[data-target="toolkit"]') },
             { id: 'education', toc: document.querySelector('[data-target="education"]') },
@@ -847,17 +859,14 @@
 
         function updateActiveToc() {
             let current = '';
-            // نافذة الرؤية: نعتبر القسم نشطاً إذا كان منتصفه ظاهراً
             const windowHeight = window.innerHeight;
-            const threshold = windowHeight / 2; // منتصف الشاشة تقريباً
+            const threshold = windowHeight / 2;
 
             for (let section of sections) {
                 const el = document.getElementById(section.id);
                 if (el) {
                     const rect = el.getBoundingClientRect();
-                    // حساب منتصف العنصر
                     const elementMiddle = rect.top + rect.height / 2;
-                    // إذا كان منتصف العنصر يقع ضمن النصف الثاني من الشاشة تقريباً
                     if (elementMiddle >= 100 && elementMiddle <= windowHeight - 100) {
                         current = section.id;
                         break;
@@ -865,7 +874,6 @@
                 }
             }
 
-            // إزالة الكلاس active من جميع الأيقونات ثم إضافته للعنصر الحالي
             sections.forEach(s => {
                 if (s.toc) {
                     s.toc.classList.remove('active');
@@ -879,13 +887,10 @@
             }
         }
 
-        // تحديث التمرير وحدث التحميل
         window.addEventListener('scroll', updateActiveToc);
         window.addEventListener('load', updateActiveToc);
-        // تحديث عند تغيير حجم النافذة
         window.addEventListener('resize', updateActiveToc);
 
-        // النقر على أيقونة TOC -> تمرير سلس
         document.querySelectorAll('.toc-icon').forEach(item => {
             item.addEventListener('click', (e) => {
                 const targetId = item.getAttribute('data-target');
