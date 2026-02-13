@@ -221,7 +221,7 @@
         }
 
         /* ---------- UNIFIED CARD STYLES ---------- */
-        .tool-grid, .project-grid, .service-grid {
+        .tool-grid, .project-grid, .service-grid, .future-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.2rem;
@@ -230,7 +230,7 @@
             z-index: 20;
         }
 
-        .tool-card, .project-card, .service-card, .education-card {
+        .tool-card, .project-card, .service-card, .education-card, .future-card {
             background: rgba(28, 34, 40, 0.8);
             backdrop-filter: blur(4px);
             padding: 1.2rem;
@@ -241,21 +241,21 @@
             z-index: 20;
         }
 
-        .tool-card:hover, .project-card:hover, .service-card:hover, .education-card:hover {
+        .tool-card:hover, .project-card:hover, .service-card:hover, .education-card:hover, .future-card:hover {
             border-color: #5AC8C8;
             box-shadow: 0 0 28px rgba(90, 200, 200, 0.2);
             transform: translateY(-4px) scale(1.01);
             background: rgba(32, 38, 45, 0.9);
         }
 
-        .tool-card i, .project-card i, .service-card i {
+        .tool-card i, .project-card i, .service-card i, .future-card i {
             color: #5AC8C8;
             font-size: 1.6rem;
             margin-bottom: 10px;
             transition: transform 0.2s;
         }
 
-        .tool-card:hover i, .project-card:hover i, .service-card:hover i {
+        .tool-card:hover i, .project-card:hover i, .service-card:hover i, .future-card:hover i {
             transform: scale(1.15);
         }
 
@@ -323,6 +323,105 @@
             text-decoration: none;
         }
 
+        /* ---------- TOOLS TAG STYLES ---------- */
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 5px;
+        }
+        .tool-tag {
+            background: rgba(90, 200, 200, 0.15);
+            border: 1px solid rgba(90, 200, 200, 0.3);
+            color: #5AC8C8;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s;
+        }
+        .tool-tag i {
+            font-size: 0.9rem;
+        }
+        .tool-tag:hover {
+            background: #5AC8C8;
+            color: #0B0E11;
+            border-color: #5AC8C8;
+        }
+
+        /* ---------- SIDEBAR TOC - ICONS ONLY ---------- */
+        .toc-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            background: rgba(21, 26, 31, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(90, 200, 200, 0.2);
+            border-radius: 40px;
+            padding: 16px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            transition: opacity 0.3s;
+        }
+        .toc-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(28, 34, 40, 0.9);
+            border: 2px solid rgba(90, 200, 200, 0.3);
+            color: #5AC8C8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .toc-icon.active {
+            border-color: #5AC8C8;
+            background: #5AC8C8;
+            color: #0B0E11;
+            box-shadow: 0 0 16px #5AC8C8;
+            transform: scale(1.1);
+        }
+        .toc-icon:hover {
+            transform: scale(1.3);
+            border-color: #5AC8C8;
+            background: #5AC8C8;
+            color: #0B0E11;
+            box-shadow: 0 0 20px #5AC8C8;
+        }
+        .toc-icon:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(21, 26, 31, 0.9);
+            color: #E8ECEF;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #5AC8C8;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+        /* hide on small screens */
+        @media (max-width: 768px) {
+            .toc-sidebar { display: none; }
+        }
+
         /* ========== MOBILE-FIRST BREAKPOINTS ========== */
         @media (max-width: 480px) {
             body { padding: 0.8rem; }
@@ -333,12 +432,14 @@
             .story { padding: 1rem; font-size: 0.8rem; }
             h2 { font-size: 1.2rem; margin: 1.5rem 0 0.6rem; padding-left: 12px; }
             h2 i { font-size: 1.4rem; }
-            .tool-grid, .project-grid, .service-grid { gap: 1rem; }
-            .tool-card, .project-card, .service-card, .education-card { padding: 1rem; }
-            .tool-card i, .project-card i, .service-card i { font-size: 1.5rem; }
+            .tool-grid, .project-grid, .service-grid, .future-grid { gap: 1rem; }
+            .tool-card, .project-card, .service-card, .education-card, .future-card { padding: 1rem; }
+            .tool-card i, .project-card i, .service-card i, .future-card i { font-size: 1.5rem; }
             .contact-grid { gap: 0.8rem; }
             .contact-icon { width: 48px; height: 48px; font-size: 1.6rem; }
             .grid-overlay { background-size: 20px 20px; }
+            .tools-list { gap: 5px; }
+            .tool-tag { font-size: 0.7rem; padding: 3px 8px; }
         }
 
         @media (max-width: 360px) {
@@ -377,6 +478,16 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
+    <!-- SIDEBAR TOC - ICONS -->
+    <div class="toc-sidebar" id="tocSidebar">
+        <div class="toc-icon" data-title="Toolkit" data-target="toolkit"><i class="fas fa-tools"></i></div>
+        <div class="toc-icon" data-title="Education" data-target="education"><i class="fas fa-graduation-cap"></i></div>
+        <div class="toc-icon" data-title="Experience" data-target="experience"><i class="fas fa-briefcase"></i></div>
+        <div class="toc-icon" data-title="Projects" data-target="projects"><i class="fas fa-flask"></i></div>
+        <div class="toc-icon" data-title="Future" data-target="future"><i class="fas fa-rocket"></i></div>
+        <div class="toc-icon" data-title="Contact" data-target="contact"><i class="fas fa-paper-plane"></i></div>
+    </div>
+
     <div class="container" id="main-container">
         <div class="glitch-wrapper">
             <span class="glitch">youssef-elhuwaihi</span>
@@ -395,37 +506,63 @@
             and the curiosity of a builder. I don’t just process numbers—I translate them into actionable insights.”
         </div>
 
-        <h2><i class="fas fa-tools"></i> My Toolkit</h2>
+        <!-- My Toolkit Section - with tags -->
+        <h2 id="toolkit"><i class="fas fa-tools"></i> My Toolkit</h2>
         <div class="tool-grid">
+            <!-- Data Visualization -->
             <div class="tool-card">
                 <i class="fas fa-chart-bar"></i>
                 <h3>Data Visualization</h3>
-                <p>Power BI · Excel Dashboards · PowerPoint</p>
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fas fa-chart-simple"></i> Power BI</span>
+                    <span class="tool-tag"><i class="fas fa-file-excel"></i> Excel Dashboards</span>
+                    <span class="tool-tag"><i class="fas fa-file-powerpoint"></i> PowerPoint</span>
+                </div>
             </div>
+            <!-- Analysis & Programming -->
             <div class="tool-card">
                 <i class="fas fa-code"></i>
                 <h3>Analysis & Programming</h3>
-                <p>Python (Pandas, Matplotlib) · SQL · Excel (Power Query) · C++</p>
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fab fa-python"></i> Python</span>
+                    <span class="tool-tag"><i class="fas fa-database"></i> SQL</span>
+                    <span class="tool-tag"><i class="fas fa-file-excel"></i> Excel (Power Query)</span>
+                    <span class="tool-tag"><i class="fas fa-code"></i> C++</span>
+                </div>
             </div>
+            <!-- Productivity -->
             <div class="tool-card">
                 <i class="fas fa-users-cog"></i>
                 <h3>Productivity</h3>
-                <p>Google Workspace · MS Office · Google Sheets</p>
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fab fa-google"></i> Google Workspace</span>
+                    <span class="tool-tag"><i class="fas fa-file-word"></i> MS Office</span>
+                    <span class="tool-tag"><i class="fas fa-file-excel"></i> Google Sheets</span>
+                </div>
             </div>
+            <!-- Analytical Strengths -->
             <div class="tool-card">
                 <i class="fas fa-brain"></i>
                 <h3>Analytical Strengths</h3>
-                <p>Logical Problem-Solving · Pixel-Perfect Detail · Pattern Recognition</p>
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fas fa-puzzle-piece"></i> Logical Problem-Solving</span>
+                    <span class="tool-tag"><i class="fas fa-ruler"></i> Pixel-Perfect Detail</span>
+                    <span class="tool-tag"><i class="fas fa-chart-line"></i> Pattern Recognition</span>
+                </div>
             </div>
+            <!-- Languages -->
             <div class="tool-card">
                 <i class="fas fa-language"></i>
                 <h3>Languages</h3>
-                <p>🇪🇬 Arabic: Native · 🇬🇧 English: <strong>Professional Proficiency</strong> (Technical & Conversational)</p>
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fas fa-flag"></i> Arabic (Native)</span>
+                    <span class="tool-tag"><i class="fas fa-flag-usa"></i> English (Professional)</span>
+                </div>
             </div>
         </div>
 
-        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-        <!-- Education card now matches other cards exactly -->
+        <!-- Education Section -->
+        <h2 id="education"><i class="fas fa-graduation-cap"></i> Education</h2>
         <div class="education-card" style="margin-top: 0.5rem;">
             <h3 style="margin-top: 0;">🎓 Bachelor of Computer Science</h3>
             <p style="color: #B8C7D1;">Misr Higher Institute for Science and Commerce · 2024 – 2028 (Expected)</p>
@@ -437,7 +574,8 @@
             </div>
         </div>
 
-        <h2><i class="fas fa-briefcase"></i> Experience in Action</h2>
+        <!-- Experience Section -->
+        <h2 id="experience"><i class="fas fa-briefcase"></i> Experience in Action</h2>
         <div style="display: flex; flex-direction: column; gap: 1.2rem; position: relative; z-index: 20;">
             <div class="tool-card" style="border-left: 6px solid #5AC8C8;">
                 <h3 style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-database"></i> Data Analyst Trainee · DEPI</h3>
@@ -458,25 +596,93 @@
             </div>
         </div>
 
-        <h2><i class="fas fa-flask"></i> Featured Projects</h2>
+        <!-- Projects Section (Current) -->
+        <h2 id="projects"><i class="fas fa-flask"></i> Projects</h2>
         <div class="project-grid">
+            <!-- Project 1: Dynamic Sales Dashboard -->
             <div class="project-card">
                 <i class="fas fa-bolt" style="font-size: 1.8rem;"></i>
                 <h3>Dynamic Sales Dashboard (Excel)</h3>
                 <p><span style="color: #5AC8C8; font-weight: 600;">The Goal:</span> Transform raw, messy sales records into a clear tool for tracking monthly growth.</p>
                 <p><span style="color: #5AC8C8; font-weight: 600;">The Work:</span> Power Query + Pivot Tables for automated cleaning and deep-dive analysis.</p>
                 <p><span style="color: #5AC8C8; font-weight: 600;">The Result:</span> A pixel-perfect, filterable dashboard by region and category.</p>
+                <!-- Tools -->
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fas fa-file-excel"></i> Excel</span>
+                    <span class="tool-tag"><i class="fas fa-filter"></i> Power Query</span>
+                    <span class="tool-tag"><i class="fas fa-table"></i> Pivot Tables</span>
+                </div>
+                <div style="margin-top: 8px;">
+                    <a href="#" target="_blank" style="color: #5AC8C8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
             </div>
+            <!-- Project 2: Superstore Sales Dashboard (image from GitHub) -->
             <div class="project-card">
+                <i class="fas fa-chart-pie" style="font-size: 1.8rem;"></i>
+                <h3>Superstore Sales Dashboard (Excel)</h3>
+                <img src="https://github.com/bilever/Superstore-Data-Analysis-Project/raw/main/dashboard.png.png" alt="Superstore Dashboard" style="width:100%; border-radius:12px; margin:10px 0;">
+                <p><span style="color: #5AC8C8; font-weight: 600;">The Goal:</span> Build an interactive Excel dashboard to monitor Superstore sales, profit, orders, and regional performance.</p>
+                <p><span style="color: #5AC8C8; font-weight: 600;">The Work:</span> Cleaned transaction data, created PivotTables, designed a multi‑chart dashboard with slicers. Key metrics: total sales $668K, profit $204K, 1175 orders, profit margin 31%.</p>
+                <p><span style="color: #5AC8C8; font-weight: 600;">The Result:</span> Dashboard provides at‑a‑glance insights: Central region highest sales ($248K), Technology top category, and regional breakdown for quick decisions.</p>
+                <!-- Tools -->
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fas fa-file-excel"></i> Excel</span>
+                    <span class="tool-tag"><i class="fas fa-filter"></i> Power Query</span>
+                    <span class="tool-tag"><i class="fas fa-table"></i> Pivot Tables</span>
+                </div>
+                <div style="margin-top: 8px;">
+                    <a href="https://github.com/bilever/Superstore-Data-Analysis-Project" target="_blank" style="color: #5AC8C8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Work Section -->
+        <h2 id="future"><i class="fas fa-rocket"></i> Future Work</h2>
+        <div class="future-grid">
+            <!-- Future Project 1: Python Automation Tool -->
+            <div class="future-card">
                 <i class="fab fa-python" style="font-size: 1.8rem;"></i>
                 <h3>Python Automation Tool (Tkinter)</h3>
                 <p><span style="color: #5AC8C8; font-weight: 600;">The Goal:</span> Simplify repetitive data entry tasks through a clean graphical interface.</p>
                 <p><span style="color: #5AC8C8; font-weight: 600;">The Work:</span> Custom GUI in Python for local data management.</p>
                 <p><span style="color: #5AC8C8; font-weight: 600;">The Result:</span> Reduced manual entry time and improved data consistency.</p>
+                <!-- Tools -->
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fab fa-python"></i> Python</span>
+                    <span class="tool-tag"><i class="fas fa-window-maximize"></i> Tkinter</span>
+                    <span class="tool-tag"><i class="fas fa-robot"></i> Automation</span>
+                </div>
+                <div style="margin-top: 8px;">
+                    <a href="#" target="_blank" style="color: #5AC8C8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+            <!-- Future Project 2 (placeholder) -->
+            <div class="future-card">
+                <i class="fas fa-cloud-upload-alt" style="font-size: 1.8rem;"></i>
+                <h3>Cloud ETL Pipeline (Coming Soon)</h3>
+                <p><span style="color: #5AC8C8; font-weight: 600;">The Goal:</span> Build a scalable data pipeline using cloud services.</p>
+                <p><span style="color: #5AC8C8; font-weight: 600;">The Work:</span> Design and implement ETL processes with AWS/GCP.</p>
+                <p><span style="color: #5AC8C8; font-weight: 600;">The Result:</span> Automated data flow from sources to analytics platform.</p>
+                <!-- Tools -->
+                <div class="tools-list">
+                    <span class="tool-tag"><i class="fab fa-aws"></i> AWS</span>
+                    <span class="tool-tag"><i class="fas fa-database"></i> SQL</span>
+                    <span class="tool-tag"><i class="fas fa-cloud"></i> ETL</span>
+                </div>
+                <div style="margin-top: 8px;">
+                    <span style="color: #8A9FAD; font-size: 0.9rem;">In development</span>
+                </div>
             </div>
         </div>
 
-        <h2><i class="fas fa-handshake"></i> How I Can Help You</h2>
+        <!-- Services Section -->
+        <h2 id="services"><i class="fas fa-handshake"></i> How I Can Help You</h2>
         <div class="service-grid">
             <div class="service-card">
                 <i class="fas fa-broom"></i>
@@ -495,8 +701,9 @@
             </div>
         </div>
 
+        <!-- Contact Section -->
         <hr>
-        <h2 style="border-left: none; text-align: center; display: block; border-bottom: 2px solid #3A6EA5; padding-bottom: 10px;">
+        <h2 id="contact" style="border-left: none; text-align: center; display: block; border-bottom: 2px solid #3A6EA5; padding-bottom: 10px;">
             <i class="fas fa-paper-plane"></i> Let’s Connect
         </h2>
         <div class="contact-grid">
@@ -626,6 +833,67 @@
         window.addEventListener('resize', () => {
             resizeCanvas();
             initParticles();
+        });
+
+        // ---------- TOC SIDEBAR SCROLL SPY (تم التعديل هنا) ----------
+        const sections = [
+            { id: 'toolkit', toc: document.querySelector('[data-target="toolkit"]') },
+            { id: 'education', toc: document.querySelector('[data-target="education"]') },
+            { id: 'experience', toc: document.querySelector('[data-target="experience"]') },
+            { id: 'projects', toc: document.querySelector('[data-target="projects"]') },
+            { id: 'future', toc: document.querySelector('[data-target="future"]') },
+            { id: 'contact', toc: document.querySelector('[data-target="contact"]') }
+        ];
+
+        function updateActiveToc() {
+            let current = '';
+            // نافذة الرؤية: نعتبر القسم نشطاً إذا كان منتصفه ظاهراً
+            const windowHeight = window.innerHeight;
+            const threshold = windowHeight / 2; // منتصف الشاشة تقريباً
+
+            for (let section of sections) {
+                const el = document.getElementById(section.id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    // حساب منتصف العنصر
+                    const elementMiddle = rect.top + rect.height / 2;
+                    // إذا كان منتصف العنصر يقع ضمن النصف الثاني من الشاشة تقريباً
+                    if (elementMiddle >= 100 && elementMiddle <= windowHeight - 100) {
+                        current = section.id;
+                        break;
+                    }
+                }
+            }
+
+            // إزالة الكلاس active من جميع الأيقونات ثم إضافته للعنصر الحالي
+            sections.forEach(s => {
+                if (s.toc) {
+                    s.toc.classList.remove('active');
+                }
+            });
+            if (current) {
+                const activeToc = sections.find(s => s.id === current)?.toc;
+                if (activeToc) {
+                    activeToc.classList.add('active');
+                }
+            }
+        }
+
+        // تحديث التمرير وحدث التحميل
+        window.addEventListener('scroll', updateActiveToc);
+        window.addEventListener('load', updateActiveToc);
+        // تحديث عند تغيير حجم النافذة
+        window.addEventListener('resize', updateActiveToc);
+
+        // النقر على أيقونة TOC -> تمرير سلس
+        document.querySelectorAll('.toc-icon').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const targetId = item.getAttribute('data-target');
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
     </script>
 </body>
